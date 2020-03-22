@@ -1,6 +1,6 @@
 ## cov-bot-19
 
-A discord bot that gives information about COVID-19 cases.
+A discord bot that gives information about COVID-19 cases. Requires python3.7.
 
 Data source: [2019 Novel Coronavirus COVID-19 (2019-nCoV) Data Repository by Johns Hopkins CSSE](https://github.com/CSSEGISandData/COVID-19/).
 
@@ -11,6 +11,8 @@ The following environment variables are needed:
 * `CHANNEL_NAME`: Channel to post periodical updates in
 
 ### Usage
+Start the bot with `python3 discord_cov_bot_19.py`
+
 The bot posts new infos peroiodically (every 24h).
 
 Commands:
