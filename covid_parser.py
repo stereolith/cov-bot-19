@@ -1,8 +1,8 @@
 import urllib.request, csv 
 import datetime
 
-URL_CONFIRMED = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv"
-URL_DEATHS = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv"
+URL_CONFIRMED = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
+URL_DEATHS = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"
 
 def parse_csv(url):
     csv_file = download_csv(url)
@@ -18,7 +18,7 @@ def parse_csv(url):
     for row in csv_reader:
         if line_count == 0:
             colnames = row
-        else:
+        elif len(row) > 0:
             country_name = row[1]
             if country_name not in countries:
                 countries[country_name] = parse_int_row(row[4:])
@@ -32,7 +32,13 @@ def parse_csv(url):
     return dates, countries
 
 def parse_int_row(row):
-    return [int(figure) for figure in row]
+    parsed = []
+    for figure in row:
+        if len(figure) > 0:
+            parsed.append(int(figure))
+        else:
+            parsed.append(0)
+    return parsed
 
 def add_rows(row1, row2):
     if len(row1) != len(row2):
